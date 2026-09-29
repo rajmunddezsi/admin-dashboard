@@ -6,7 +6,7 @@ export default function ProductsPage() {
   return (
     <>
       <PageTitle title="Products" />
-      <ViewSelector views={["Cards", "Table"]} />
+      <ViewSelector />
       <ProductTable />
     </>
   );

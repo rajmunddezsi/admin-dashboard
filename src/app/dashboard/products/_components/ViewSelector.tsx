@@ -2,13 +2,10 @@
 
 import { useState, type ChangeEvent } from "react";
 
-type ViewType = "Cards" | "Table";
+const views = ["Table", "Cards"] as const;
+type ViewType = (typeof views)[number];
 
-interface ViewSelectorProps {
-  views: ViewType[];
-}
-
-export default function ViewSelector({ views }: ViewSelectorProps) {
+export default function ViewSelector() {
   const [selectedView, setSelectedView] = useState<ViewType>("Table");
 
   const handleSelect = (e: ChangeEvent<HTMLSelectElement>) =>
