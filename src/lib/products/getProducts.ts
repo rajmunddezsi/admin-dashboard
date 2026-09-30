@@ -8,7 +8,7 @@ interface ProductsResponse {
 }
 
 export async function getProducts(): Promise<Product[]> {
-    const response = await fetch("https://dummyjson.com/products?limit=5");
+    const response = await fetch("https://dummyjson.com/products?limit=5&delay=2000");
 
     if (!response.ok) {
         throw new Error("Failed to fetch products!");
