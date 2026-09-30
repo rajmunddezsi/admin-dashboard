@@ -1,16 +1,17 @@
 import PageTitle from "@/components/ui/PageTitle";
-import ProductTable from "./_components/ProductTable";
 import ViewSelector from "./_components/ViewSelector";
-import { getProducts } from "@/lib/products/getProducts";
+import { Suspense } from "react";
+import ProductTableSkeleton from "./_components/table/ProductTableSkeleton";
+import ProductTableSection from "./_components/table/ProductTableSection";
 
-export default async function ProductsPage() {
-  const products = await getProducts();
-
+export default function ProductsPage() {
   return (
     <>
       <PageTitle title="Products" />
       <ViewSelector />
-      <ProductTable products={products} />
+      <Suspense fallback={<ProductTableSkeleton />}>
+        <ProductTableSection />
+      </Suspense>
     </>
   );
 }
