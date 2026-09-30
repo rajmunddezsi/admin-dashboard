@@ -10,14 +10,23 @@ export default function ProductTable({ products }: ProductTableProps) {
   }
 
   return (
-    <div>
-      {products.map((product) => (
-        <div key={product.id}>
-          <div>{product.title}</div>
-          <div>{product.category}</div>
-          <div>{product.price}</div>
-        </div>
-      ))}
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((product) => (
+          <tr key={product.id}>
+            <td>{product.title}</td>
+            <td>{product.category}</td>
+            <td>{product.price}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
