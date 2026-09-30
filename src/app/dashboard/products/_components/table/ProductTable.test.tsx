@@ -15,18 +15,38 @@ describe("ProductTable", () => {
     const products: Product[] = [
       {
         id: 1,
-        title: "Essence Mascara Lash Princess",
-        category: "beauty",
-        price: 9.99,
+        title: "Test product",
+        description: "Test description",
+        category: "test",
+        price: 10,
+        rating: 5,
+        availabilityStatus: "In Stock",
       },
     ];
 
     render(<ProductTable products={products} />);
 
-    expect(
-      screen.getByText("Essence Mascara Lash Princess"),
-    ).toBeInTheDocument();
-    expect(screen.getByText("beauty")).toBeInTheDocument();
-    expect(screen.getByText("9.99")).toBeInTheDocument();
+    expect(screen.getByText("Test product")).toBeInTheDocument();
+    expect(screen.getByText("test")).toBeInTheDocument();
+    expect(screen.getByText("10")).toBeInTheDocument();
+  });
+
+  it("links the product title to the product details page", () => {
+    const products: Product[] = [
+      {
+        id: 1,
+        title: "Test product",
+        description: "Test description",
+        category: "test",
+        price: 10,
+        rating: 5,
+        availabilityStatus: "In Stock",
+      },
+    ];
+
+    render(<ProductTable products={products} />);
+    const link = screen.getByRole("link", { name: "Test product" });
+
+    expect(link).toHaveAttribute("href", "/dashboard/products/1");
   });
 });
