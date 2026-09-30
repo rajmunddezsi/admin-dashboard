@@ -3,4 +3,7 @@ export interface Product {
     title: string;
     category: string;
     price: number;
+    description: string;
+    rating: number;
+    availabilityStatus: string;
 }

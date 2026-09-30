@@ -1,4 +1,6 @@
-import { type Product } from "@/lib/products/types";
+import Link from "next/link";
+
+import type { Product } from "@/lib/products/types";
 
 interface ProductTableProps {
   products: Product[];
@@ -21,7 +23,11 @@ export default function ProductTable({ products }: ProductTableProps) {
       <tbody>
         {products.map((product) => (
           <tr key={product.id}>
-            <td>{product.title}</td>
+            <td>
+              <Link href={`/dashboard/products/${product.id}`}>
+                {product.title}
+              </Link>
+            </td>
             <td>{product.category}</td>
             <td>{product.price}</td>
           </tr>
