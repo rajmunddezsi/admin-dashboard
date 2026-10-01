@@ -9,8 +9,9 @@ export default function ProductSearch() {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
-  const query = params.get("query") ?? "";
   const timeoutId = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const query = params.get("query") ?? "";
 
   const handleChange = (searchText: string) => {
     if (timeoutId.current !== null) clearTimeout(timeoutId.current);

@@ -7,3 +7,8 @@ export interface Product {
     rating: number;
     availabilityStatus: string;
 }
+
+export interface ProductFilters {
+    query?: string;
+    category?: string;
+}
