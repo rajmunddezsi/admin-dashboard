@@ -1,14 +1,15 @@
 import { getProducts } from "@/lib/products/getProducts";
 import ProductTable from "./ProductTable";
+import type { ProductFilters } from "@/lib/products/types";
 
 interface ProductTableSectionProps {
-  query: string;
+  filters: ProductFilters;
 }
 
 export default async function ProductTableSection({
-  query,
+  filters,
 }: ProductTableSectionProps) {
-  const products = await getProducts(query);
+  const products = await getProducts(filters);
 
   return <ProductTable products={products} />;
 }
