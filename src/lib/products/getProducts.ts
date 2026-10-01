@@ -1,20 +1,30 @@
 import type { Product } from "./types";
 
 interface ProductsResponse {
-    products: Product[];
-    total: number;
-    skip: number;
-    limit: number;
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
 }
 
-export async function getProducts(): Promise<Product[]> {
-    const response = await fetch("https://dummyjson.com/products?limit=5&delay=2000");
+const BASE_URL = "https://dummyjson.com/products";
 
-    if (!response.ok) {
-        throw new Error("Failed to fetch products!");
-    }
+export async function getProducts(query: string): Promise<Product[]> {
+  let url = `${BASE_URL}?limit=5&delay=2000`;
 
-    const {products} = await response.json() as ProductsResponse;
+  if (query) {
+    const normalizedQuery = encodeURIComponent(query);
 
-    return products;
+    url = `${BASE_URL}/search?q=${normalizedQuery}&limit=5&delay=2000`;
+  }
+
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch products!");
+  }
+
+  const { products } = (await response.json()) as ProductsResponse;
+
+  return products;
 }
