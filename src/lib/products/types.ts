@@ -11,4 +11,10 @@ export interface Product {
 export interface ProductFilters {
     query?: string;
     category?: string;
+    page?: string;
+}
+
+export interface PaginatedProducts {
+    products: Product[];
+    total: number;
 }

@@ -18,6 +18,7 @@ export default function ProductCategoryFilter() {
       nextParams.delete("category");
     }
 
+    nextParams.delete('page');
     const queryString = nextParams.toString();
 
     router.replace(queryString ? `${pathname}?${queryString}` : pathname);

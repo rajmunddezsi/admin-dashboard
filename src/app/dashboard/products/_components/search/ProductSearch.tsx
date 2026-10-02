@@ -31,6 +31,7 @@ export default function ProductSearch() {
       nextParams.delete("query");
     }
 
+    nextParams.delete("page");
     const queryString = nextParams.toString();
 
     router.replace(queryString ? `${pathname}?${queryString}` : pathname);
