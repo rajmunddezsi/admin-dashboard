@@ -2,12 +2,41 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import z from "zod";
 
-export async function createProduct(formData: FormData): Promise<void> {
-    const title = String(formData.get('title') ?? '');
-    const description = String(formData.get('description') ?? '');
-    const category = String(formData.get('category') ?? '');
-    const price = Number(formData.get('price') ?? '');
+export interface ProductFormState {
+    errors?: {
+        title?: string[],
+        description?: string[],
+        category?: string[],
+        price?: string[]
+    };
+    message?: string
+}
+
+const ProductFormSchema = z.object({
+    title: z.string().trim().min(1, {error: "Title is required."}),
+    description: z.string().trim().min(1, {error: "Description is required."}),
+    category: z.string().trim().min(1, {error: "Category is required."}),
+    price: z.coerce.number().positive({error: "Price must be greater than 0."})
+});
+
+export async function createProduct(_prevState: ProductFormState, formData: FormData): Promise<ProductFormState> {
+    const validatedFields = ProductFormSchema.safeParse({
+        title: formData.get("title"),
+        description: formData.get("description"),
+        category: formData.get("category"),
+        price: formData.get('price')
+    });
+
+    if (!validatedFields.success) {
+        return {
+            errors: z.flattenError(validatedFields.error).fieldErrors,
+            message: "Please fix the errors!"
+        }
+    }
+
+    const {title, description, category, price} = validatedFields.data;
 
     const response = await fetch('https://dummyjson.com/products/add', {
         headers: {
@@ -25,11 +54,7 @@ export async function createProduct(formData: FormData): Promise<void> {
     if (!response.ok) {
         throw new Error('Failed to create product!');
     }
-
-    const createdProduct = await response.json();
-
-    console.log(createdProduct);
-
+    
     revalidatePath('/dashboard/products');
     redirect('/dashboard/products');
 }
