@@ -1,3 +1,5 @@
+export type ProductSort = 'price-asc' | 'price-desc' | '';
+
 export interface Product {
     id: number;
     title: string;
@@ -12,6 +14,7 @@ export interface ProductFilters {
     query?: string;
     category?: string;
     page?: string;
+    sort?: ProductSort;
 }
 
 export interface PaginatedProducts {

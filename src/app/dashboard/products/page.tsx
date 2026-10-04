@@ -8,6 +8,7 @@ import ProductCategoryFilter from "./_components/search/ProductCategoryFilter";
 import type { ProductFilters } from "@/lib/products/types";
 import { redirect } from "next/navigation";
 import { parsePage } from "@/lib/products/pagination";
+import ProductSort from "./_components/search/ProductSort";
 
 interface ProductsPageProps {
   searchParams: Promise<ProductFilters>;
@@ -16,7 +17,7 @@ interface ProductsPageProps {
 export default async function ProductsPage({
   searchParams,
 }: ProductsPageProps) {
-  const { query = "", category = "", page } = await searchParams;
+  const { query = "", category = "", page, sort = "" } = await searchParams;
   const { currentPage, isValid } = parsePage(page);
 
   if (page !== undefined && !isValid) {
@@ -28,6 +29,10 @@ export default async function ProductsPage({
 
     if (category) {
       params.set("category", category);
+    }
+
+    if (sort) {
+      params.set("sort", sort);
     }
 
     const queryString = params.toString();
@@ -45,17 +50,16 @@ export default async function ProductsPage({
       <ViewSelector />
       <ProductSearch />
       <ProductCategoryFilter />
+      <ProductSort />
       <Suspense
-        key={`${query}-${category}-${currentPage}`}
+        key={`${query}-${category}-${currentPage}-${sort}`}
         fallback={<ProductTableSkeleton />}
       >
         <ProductTableSection
-          filters={{ query, category }}
+          filters={{ query, category, sort }}
           currentPage={currentPage}
         />
       </Suspense>
     </>
   );
 }
-
-
