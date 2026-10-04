@@ -9,6 +9,7 @@ import type { ProductFilters } from "@/lib/products/types";
 import { redirect } from "next/navigation";
 import { parsePage } from "@/lib/products/pagination";
 import ProductSort from "./_components/search/ProductSort";
+import Link from "next/link";
 
 interface ProductsPageProps {
   searchParams: Promise<ProductFilters>;
@@ -47,6 +48,7 @@ export default async function ProductsPage({
   return (
     <>
       <PageTitle title="Products" />
+      <Link href="/dashboard/products/new">Create product</Link>
       <ViewSelector />
       <ProductSearch />
       <ProductCategoryFilter />
