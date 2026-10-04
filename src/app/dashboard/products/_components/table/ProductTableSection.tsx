@@ -1,6 +1,6 @@
 import { getProducts } from "@/lib/products/getProducts";
 import ProductTable from "./ProductTable";
-import type { Product, ProductFilters } from "@/lib/products/types";
+import type { ProductFilters } from "@/lib/products/types";
 import { PRODUCTS_PAGE_SIZE } from "@/lib/products/constants";
 import Pagination from "../pagination/Pagination";
 import { redirect } from "next/navigation";
