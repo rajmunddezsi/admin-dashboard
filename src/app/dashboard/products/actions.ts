@@ -61,12 +61,12 @@ export async function createProduct(_prevState: ProductFormState, formData: Form
 }
 
 const UpdateProductSchema = ProductFormSchema.extend({
-    id: z.string().trim().min(1, {error: 'Product ID is required!'}).pipe(z.coerce.number<string>().int().positive())
+    id: z.int().positive()
 })
 
-export async function updateProduct(_prevState: ProductFormState, formData: FormData): Promise<ProductFormState> {
+export async function updateProduct(productId: number, _prevState: ProductFormState, formData: FormData): Promise<ProductFormState> {
     const validatedFields = UpdateProductSchema.safeParse({
-        id: formData.get("id"),
+        id: productId,
         title: formData.get('title'),
         description: formData.get("description"),
         category: formData.get("category"),
@@ -104,12 +104,12 @@ export async function updateProduct(_prevState: ProductFormState, formData: Form
 }
 
 const DeleteProductSchema = z.object({
-    id: z.string().trim().min(1).pipe(z.coerce.number<string>().int().positive())
+    id: z.int().positive()
 })
 
-export async function deleteProduct(formData: FormData): Promise<void> {
+export async function deleteProduct(productId: number): Promise<void> {
     const validatedFields = DeleteProductSchema.safeParse({
-        id: formData.get('id')
+        id: productId
     })
 
     if (!validatedFields.success) {

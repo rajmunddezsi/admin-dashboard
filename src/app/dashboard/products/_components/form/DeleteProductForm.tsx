@@ -6,9 +6,10 @@ interface DeleteProductFormProps {
 }
 
 export default function DeleteProductForm({ id }: DeleteProductFormProps) {
+  const formAction = deleteProduct.bind(null, id);
+  
   return (
-    <form action={deleteProduct}>
-      <input type="hidden" name="id" value={id} />
+    <form action={formAction}>
       <SubmitButton label="Delete" />
     </form>
   );
