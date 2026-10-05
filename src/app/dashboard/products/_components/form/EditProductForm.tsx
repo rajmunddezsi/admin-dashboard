@@ -16,12 +16,16 @@ const INITIAL_STATE: ProductFormState = {
 };
 
 export default function EditProductForm({ product }: EditProductFormProps) {
-  const [state, formAction] = useActionState(updateProduct, INITIAL_STATE);
   const { id, title, description, category, price } = product;
+  const updateProductWithId = updateProduct.bind(null, id);
+
+  const [state, formAction] = useActionState(
+    updateProductWithId,
+    INITIAL_STATE,
+  );
 
   return (
     <form action={formAction}>
-      <input type="hidden" name="id" value={id} />
       <div>
         <label htmlFor="title">Title</label>
         <input type="text" name="title" id="title" defaultValue={title} />
