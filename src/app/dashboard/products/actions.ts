@@ -129,3 +129,9 @@ export async function deleteProduct(productId: number): Promise<void> {
     revalidatePath('/dashboard/products');
     redirect('/dashboard/products');
 }
+
+export async function toggleFavorite(isFavorite: boolean): Promise<boolean> {
+    return new Promise((resolve) => {
+        setTimeout(() => resolve(isFavorite), 1000)
+    })
+}
