@@ -135,3 +135,15 @@ export async function toggleFavorite(isFavorite: boolean): Promise<boolean> {
         setTimeout(() => resolve(isFavorite), 1000)
     })
 }
+
+export async function deleteProductOptimistically(id: number): Promise<number> {
+    await new Promise((resolve) => {
+        setTimeout(() => resolve(id), 1000)
+    })
+
+    if (id === 2) {
+        throw new Error('Failed to delete product!');
+    }
+
+    return id;
+}
