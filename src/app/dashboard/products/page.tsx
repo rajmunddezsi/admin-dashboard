@@ -5,15 +5,46 @@ import ProductTableSkeleton from "./_components/table/ProductTableSkeleton";
 import ProductTableSection from "./_components/table/ProductTableSection";
 import ProductSearch from "./_components/search/ProductSearch";
 import ProductCategoryFilter from "./_components/search/ProductCategoryFilter";
-import type { ProductFilters } from "@/lib/products/types";
+import type { Product, ProductFilters } from "@/lib/products/types";
 import { redirect } from "next/navigation";
 import { parsePage } from "@/lib/products/pagination";
 import ProductSort from "./_components/search/ProductSort";
 import Link from "next/link";
+import OptimisticProductList from "./_components/OptimisticProductList";
 
 interface ProductsPageProps {
   searchParams: Promise<ProductFilters>;
 }
+
+const mockProducts: Product[] = [
+  {
+    id: 1,
+    title: "iPhone 17 Pro",
+    category: "smartphones",
+    price: 1299,
+    description: "Apple smartphone",
+    rating: 4.8,
+    availabilityStatus: "In Stock",
+  },
+  {
+    id: 2,
+    title: "MacBook Air",
+    category: "laptops",
+    price: 1499,
+    description: "Apple laptop",
+    rating: 4.7,
+    availabilityStatus: "In Stock",
+  },
+  {
+    id: 3,
+    title: "Pixel 10",
+    category: "smartphones",
+    price: 999,
+    description: "Google smartphone",
+    rating: 4.6,
+    availabilityStatus: "Low Stock",
+  },
+];
 
 export default async function ProductsPage({
   searchParams,
@@ -62,6 +93,7 @@ export default async function ProductsPage({
           currentPage={currentPage}
         />
       </Suspense>
+      <OptimisticProductList initialProducts={mockProducts} />
     </>
   );
 }
