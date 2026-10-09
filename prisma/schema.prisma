@@ -27,10 +27,10 @@ model Product {
 }
 
 model User {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String?
-  emailVerified DateTime @map("email_verified")
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
   image         String?
 
   accounts Account[]
@@ -40,22 +40,22 @@ model User {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  proverderAccountId String  @map("provider_account_id")
-  refreshToken       String? @map("refresh_token") @db.Text
-  accessToken        String? @map("access_token") @db.Text
-  expiresAt          Int?    @map("expires_at")
-  tokenType          String? @map("token_type")
-  scope              String?
-  idToken            String? @map("id_token") @db.Text
-  sessionState       String? @map("session_state")
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refreshToken      String? @map("refresh_token") @db.Text
+  accessToken       String? @map("access_token") @db.Text
+  expiresAt         Int?    @map("expires_at")
+  tokenType         String? @map("token_type")
+  scope             String?
+  idToken           String? @map("id_token") @db.Text
+  sessionState      String? @map("session_state")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, proverderAccountId])
+  @@unique([provider, providerAccountId])
   @@map("accounts")
 }
 
