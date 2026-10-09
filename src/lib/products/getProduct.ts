@@ -1,17 +1,16 @@
 import type { Product } from "./types";
+import prisma from "../prisma";
 
-export default async function getProduct(id: string): Promise<Product | undefined> {
-    const response = await fetch(`https://dummyjson.com/products/${id}`);
+export default async function getProduct(id: string): Promise<Product | null> {
+  const normalizedId = Number(id);
 
-    if (response.status === 404) {
-        return undefined;
-    }
+  if (!Number.isInteger(normalizedId) || normalizedId < 1) {
+    return null;
+  }
 
-    if (!response.ok) {
-        throw new Error(`Failed to fetch product. ID: ${id}`);
-    }
-
-    const product = (await response.json()) as Product;
-
-    return product;
+  return prisma.product.findUnique({
+    where: {
+      id: normalizedId,
+    },
+  });
 }

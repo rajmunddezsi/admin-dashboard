@@ -6,8 +6,8 @@ export interface Product {
     category: string;
     price: number;
     description: string;
-    rating: number;
-    availabilityStatus: string;
+    rating: number | null;
+    availabilityStatus: string | null;
 }
 
 export interface ProductFilters {
