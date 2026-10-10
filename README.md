@@ -1,10 +1,10 @@
-# Admin Dashboard Learning Project
+# Next.js Full-Stack Lab
 
-A Next.js sandbox project for learning and practicing production-oriented frontend and full-stack concepts.
+A sandbox project for learning and practicing production oriented Next.js, frontend and full-stack development concepts.
 
-This repository is intentionally used as a learning environment before building the final portfolio Admin Dashboard in a separate clean repository.
+This repository is intentionally used as a learning environment. The goal is to explore architecture, data flow, testing, authentication, database integration and other production oriented patterns before applying them in a separate portfolio project.
 
-There is intentionally no CSS or visual styling in this repository, because it is a sandbox focused on architecture, data flow, testing, authentication, and application logic rather than UI polish.
+There is intentionally no CSS or visual styling in this repository, because the focus is on architecture, application logic and full-stack concepts rather than UI polish.
 
 ## Tech Stack
 
@@ -17,7 +17,6 @@ There is intentionally no CSS or visual styling in this repository, because it i
 - Zod
 - Vitest
 - React Testing Library
-- Tailwind CSS
 - pnpm
 
 ## Current Learning Scope
@@ -63,7 +62,7 @@ In progress / upcoming:
 
 ## Project Purpose
 
-This repository is a sandbox.
+This repository is a learning sandbox used to practice and understand modern Next.js and full-stack development.
 
 It intentionally contains:
 
@@ -75,7 +74,7 @@ It intentionally contains:
 - architecture exercises
 - Git and pull request practice
 
-The final portfolio Admin Dashboard will be created later in a separate clean repository with a cleaner Git history and production-oriented architecture.
+After completing the learning roadmap, the concepts and patterns practiced here will be applied in a separate portfolio project: a production oriented Admin Dashboard built from a clean repository.
 
 ## Requirements
 
@@ -345,7 +344,7 @@ Current roadmap:
 21. Caching + Revalidation + use cache
 22. Parallel Data Fetching + Waterfall Optimization
 23. Advanced Suspense + Streaming Architecture
-24. Clean Portfolio Admin Dashboard
+24. Start Portfolio Admin Dashboard — new clean repository
 25. Component / Integration Testing
 26. Mocking + API Testing
 27. Playwright E2E
@@ -359,6 +358,8 @@ Current roadmap:
 
 ## Notes
 
-This is not the final portfolio repository.
+This repository is not intended to be a finished product.
 
-The goal is to understand the architecture and tools deeply, practice implementation decisions, and make mistakes safely before rebuilding the final Admin Dashboard from a clean repository.
+Its purpose is to provide a safe environment for experimenting with Next.js, PostgreSQL, Prisma, Auth.js, testing, architecture and full-stack development patterns.
+
+After completing the learning roadmap, a separate Admin Dashboard portfolio project will be built using the knowledge and patterns practiced here.
